@@ -26,7 +26,7 @@ const stdout = std.io.getStdOut().writer();
 // Exemplo com "defer" e "errdefer"
 // defer -> é incondicional, executa ao sair do escopo
 // errdefer -> é condicional, executa se sair do escopo com erro
-// são executadas em LIFO
+// são executadas em LIFO (último que entra, primeiro que sai)
 
 fn foo() !void{ return error.FooError;}
 pub fn main()!void{
