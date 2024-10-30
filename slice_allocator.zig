@@ -17,6 +17,6 @@ pub fn main() !void {
 
     const buffer = try allocator.alloc(u64, n);
     const slice = buffer[0..];
-    _=slice;
+    _ = slice;
 
 }
