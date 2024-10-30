@@ -6,7 +6,7 @@ pub fn main() void {
         .power = 100,
     };
 
-    std.debug.print("main: {*}\n", .{&user});
+    std.debug.print("main: &user: {*}\n&user.id: {*}\n&user.power: {*}\n", .{&user,&user.id,&user.power});
 
     //levelUp(user); // Os paramêtros de uma função são CONSTANTES, *isto não compila
     //levelUp(&user); // Os paramêtros de uma função são CONSTANTES, *isto não compila
