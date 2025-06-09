@@ -33,6 +33,21 @@ pub fn main() void {
    
     const int_ex:i16 = @as(i16, 127.0);//@intFromFloat(divide(5,3)); //explicit cast
     std.debug.print("int_ex = {} - type of int_ex = {}\n",.{int_ex, @TypeOf(int_ex)});
+
+    //bool example
+    {
+        const a = 5;
+        const b = 3;
+        const result = if(a != b) 47 else 3089;
+        std.debug.print("result = {} - type of result = {}\n", .{result, @TypeOf(result)});
+
+        if(a!=b){
+            std.debug.print("a != b\n", .{});
+        } else {
+            std.debug.print("a == b\n", .{});
+        }
+    }
+
 }
 
 
