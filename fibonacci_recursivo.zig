@@ -1,3 +1,6 @@
+// Fibonacci em estrutura recursiva
+// Gerando a série em tempo de compilação
+
 const std = @import("std");
 const print = std.debug.print;
 
