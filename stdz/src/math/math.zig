@@ -10,6 +10,8 @@
 /// Rotinas para raízes quadradas, cúbicas utilizam o método de Newton-Raphson.
 const std = @import("std");
 
+/// FUNÇÕES TRIGONOMÉTRICAS
+/// Constantes para conversão entre graus e radianos
 const rad_per_deg = std.math.rad_per_deg;
 const deg_per_rad = std.math.deg_per_rad;
 
@@ -100,3 +102,30 @@ pub inline fn arctan(radians: anytype) @TypeOf(radians) {
     if (@abs(tangent) < 1e-7) @panic("Arco tangente indefinida para este ângulo");
     return (1.0 / tangent);
 }
+
+/// Nome: csc(radians)
+/// Função: Cálcula a Cosecante de um ângulo em radianos
+/// Retorna: valor da cosecante conforme o tipo numérico de entrada
+/// Exemplo: csc() retorna aproximadamente 1.0
+///
+pub inline fn csc(radians: anytype) @TypeOf(radians) {
+    const sine = sin(radians);
+    if (@abs(sine) < 1e-7) @panic("Cosecante indefinida para este ângulo");
+    return 1.0 / sine;
+}
+
+/// Nome: sec(radians)
+/// Função: Cálcula a Secante de um ângulo em radianos
+/// Retorna: valor da secante conforme o tipo numérico de entrada
+/// Exemplo: sec() retorna aproximadamente 1.0
+///
+pub inline fn sec(radians: anytype) @TypeOf(radians) {
+    const cosine = cos(radians);
+    if (@abs(cosine) < 1e-7) @panic("Secante indefinida para este ângulo");
+    return 1.0 / cosine;
+}
+
+// FIM DAS FUNÇÕES TRIGONOMÉTRICAS
+
+
+// Fim do arquivo math.zig
