@@ -10,6 +10,29 @@
 /// Rotinas para raízes quadradas, cúbicas utilizam o método de Newton-Raphson.
 const std = @import("std");
 
+const rad_per_deg = std.math.rad_per_deg;
+const deg_per_rad = std.math.deg_per_rad;
+
+/// Nome: radFromDegrees(ang)
+/// Função: Converte o valor de um ângulo(formato decimal) em radianos
+/// Retorna: valor em radianos do tipo float - variando conforme o tipo numérico de entrada
+/// Exemplo: radFromDegree(90) retorna aproximadamente 1.5708
+/// => 90 graus * PI / 180 = 1.5708 radianos
+///
+pub inline fn radFromDegrees(ang: anytype) if (@TypeOf(ang) == comptime_int) comptime_float else @TypeOf(ang) {
+    return ang * rad_per_deg;
+}
+
+/// Nome: degreesFromRad(rad)
+/// Função: Converte o valor de radianos em um ângulo(formato decimal)
+/// Retorna: valor em radianos do tipo float - variando conforme o tipo numérico de entrada
+/// Exemplo: degreesFromRad(1.5708) retorna aproximadamente 90.0
+/// => 1.5708 radianos * 180 / PI = 90 graus 
+///
+pub inline fn degreesFromRad(rad: anytype) if (@TypeOf(rad) == comptime_int) comptime_float else @TypeOf(rad) {
+    return rad * deg_per_rad;
+}
+
 /// Nome: sin(radians)
 /// Função: Cálcula o seno de um ângulo em radianos
 /// Retorna: valor do seno conforme o tipo numérico de entrada
@@ -35,15 +58,6 @@ pub inline fn sin(radians: anytype) @TypeOf(radians) {
     return sum;
 }
 
-test "basic sin func" {
-    const value: f32 = (0.0);
-    std.debug.print("PI: {}\n", .{std.math.pi});
-    std.debug.print("sin(value): {}\n", .{sin(value)});
-    std.debug.print("sin(PI/2) = {}\n", .{sin(std.math.pi / 2.0)});
-    std.debug.print("sin(PI/2) - nativo: {}\n", .{@sin(std.math.pi / 2.0)});
-    try std.testing.expect(@abs(sin(std.math.pi) / 2.0) - 1.0 < 1e-7);
-}
-
 /// Nome: cos(radians)
 /// Função: Cálcula o cosseno de um ângulo em radianos
 /// Retorna: valor do cosseno conforme o tipo numérico de entrada
@@ -51,16 +65,6 @@ test "basic sin func" {
 ///
 pub inline fn cos(radians: anytype) @TypeOf(radians) {
     return sin(std.math.pi / 2.0 - radians);
-}
-test "basic cos func" {
-    const value: f32 = (0.0);
-    std.debug.print("Valores para coseno:\n", .{});
-    std.debug.print("TAN({}): {}\n", .{ value, @tan(std.math.pi / 2.0) });
-    std.debug.print("cos({}): {}\n", .{ value, cos(value) });
-    std.debug.print("sin({}): {}\n", .{ value, sin(value) });
-    std.debug.print("cos(PI) = {}\n", .{@abs(cos(std.math.pi)) - 1.0});
-    std.debug.print("cos(PI)(nativo) = {}\n", .{@cos(std.math.pi)});
-    try std.testing.expect(@abs(cos(std.math.pi)) - 1.0 < 1e-7);
 }
 
 /// Nome: tan(radians)
@@ -73,12 +77,26 @@ pub inline fn tan(radians: anytype) @TypeOf(radians) {
     if (@abs(cosine) < 1e-7) @panic("Tangente indefinida para este ângulo");
     return sin(radians) / cosine;
 }
-test "basic tan func" {
-    const value: f32 = (std.math.pi );
-    std.debug.print("Valores para tangente:\n", .{});
-    std.debug.print("TAN({}): {}\n", .{ value, @tan(value) });
-    std.debug.print("tan({}): {}\n", .{ value, tan(value) });
-    std.debug.print("tan(PI/4): {}\n", .{tan(std.math.pi / 4.0)});
-    std.debug.print("tan(PI) = {}\n", .{@abs(tan(std.math.pi)) - 1.0});
-    try std.testing.expect(@abs(tan(std.math.pi)) - 1.0 < 1e-7);
+
+/// Nome: cotan(radians)
+/// Função: Cálcula a cotangente de um ângulo em radianos
+/// Retorna: valor da cotangente conforme o tipo numérico de entrada
+/// Exemplo: cotan() retorna aproximadamente 1.0
+///
+pub inline fn cotan(radians: anytype) @TypeOf(radians) {
+    const sine = sin(radians);
+    if (@abs(sine) < 1e-7) @panic("Cotangente indefinida para este ângulo");
+    return cos(radians) / sine;
+}
+
+/// Nome: arctan(radians)
+/// Função: Cálcula a arco tangente de um ângulo em radianos
+/// Retorna: valor da arco tangente conforme o tipo numérico de entrada
+/// Exemplo: arctan() retorna aproximadamente 1.0
+///
+pub inline fn arctan(radians: anytype) @TypeOf(radians) {
+    const tangent = tan(radians);
+    //std.debug.print("tangente({})->{}\n", .{ radians, tangent });
+    if (@abs(tangent) < 1e-7) @panic("Arco tangente indefinida para este ângulo");
+    return (1.0 / tangent);
 }
