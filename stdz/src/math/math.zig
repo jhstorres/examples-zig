@@ -95,13 +95,17 @@ pub inline fn cotan(radians: anytype) @TypeOf(radians) {
 /// Função: Cálcula a arco tangente de um ângulo em radianos
 /// Retorna: valor da arco tangente conforme o tipo numérico de entrada
 /// Exemplo: arctan() retorna aproximadamente 1.0
-///
-pub inline fn arctan(radians: anytype) @TypeOf(radians) {
-    const tangent = tan(radians);
-    //std.debug.print("tangente({})->{}\n", .{ radians, tangent });
-    if (@abs(tangent) < 1e-7) @panic("Arco tangente indefinida para este ângulo");
-    return (1.0 / tangent);
-}
+/// O código extraído do livro "Bibliotecas C Library - Kris Jamsa", existe um erro conceitual que traz 
+/// o cálculo do arctan() como uma simples inversão da tangente. Isso não chega a um
+/// valor correto (código abaixo). 
+/// Para o valor correto, precisamos calcular o arctan() com base na série de Taylor.
+// código do livro:
+//pub inline fn arctan(radians: anytype) @TypeOf(radians) {
+//    const tangent = tan(radians);
+//    //std.debug.print("tangente({})->{}\n", .{ radians, tangent });
+//    if (@abs(tangent) < 1e-7) @panic("Arco tangente indefinida para este ângulo");
+//    return (1.0 / tangent);
+//}
 
 /// Nome: csc(radians)
 /// Função: Cálcula a Cosecante de um ângulo em radianos
