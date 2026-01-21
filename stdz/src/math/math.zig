@@ -130,6 +130,9 @@ pub inline fn sec(radians: anytype) @TypeOf(radians) {
 //     return (1.0 / tangent);
 // }
 
+
+
+
 // FIM DAS FUNÇÕES TRIGONOMÉTRICAS
 
 
