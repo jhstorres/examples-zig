@@ -91,17 +91,6 @@ pub inline fn cotan(radians: anytype) @TypeOf(radians) {
     return cos(radians) / sine;
 }
 
-/// Nome: arctan(radians)
-/// Função: Cálcula a arco tangente de um ângulo em radianos
-/// Retorna: valor da arco tangente conforme o tipo numérico de entrada
-/// Exemplo: arctan() retorna aproximadamente 1.0
-///
-pub inline fn arctan(radians: anytype) @TypeOf(radians) {
-    const tangent = tan(radians);
-    //std.debug.print("tangente({})->{}\n", .{ radians, tangent });
-    if (@abs(tangent) < 1e-7) @panic("Arco tangente indefinida para este ângulo");
-    return (1.0 / tangent);
-}
 
 /// Nome: csc(radians)
 /// Função: Cálcula a Cosecante de um ângulo em radianos
@@ -124,6 +113,22 @@ pub inline fn sec(radians: anytype) @TypeOf(radians) {
     if (@abs(cosine) < 1e-7) @panic("Secante indefinida para este ângulo");
     return 1.0 / cosine;
 }
+
+
+/// Nome: arctan(radians)
+/// Função: Cálcula a arco tangente de uma tangente de um ângulo em radianos ou seja, 
+/// o ângulo cujo valor da tangente é igual ao valor fornecido
+/// Retorna: valor do ângulo em radianos conforme o tipo numérico de entrada
+/// Observação: A função arctan() é definida apenas para valores de tangente diferentes de zero;
+/// utiliza a série de Taylor para aproximação.
+/// Exemplo: arctan() retorna aproximadamente: 
+///
+// pub inline fn arctan(radians: anytype) @TypeOf(radians) {
+//     const tangent = tan(radians);
+//     //std.debug.print("tangente({})->{}\n", .{ radians, tangent });
+//     if (@abs(tangent) < 1e-7) @panic("Arco tangente indefinida para este ângulo");
+//     return (1.0 / tangent);
+// }
 
 // FIM DAS FUNÇÕES TRIGONOMÉTRICAS
 
