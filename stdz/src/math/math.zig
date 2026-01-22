@@ -196,6 +196,7 @@ pub inline fn fatorial(number: anytype) @TypeOf(number) {
     }
 }
 
+<<<<<<< HEAD
 /// Nome: pow(number, exponent)
 /// Função: Calcula a potência de um número elevado a outro
 /// Retorna: valor da potência conforme o tipo numérico de entrada
@@ -229,4 +230,6 @@ pub inline fn pow(number: anytype, exponent: i32) @TypeOf(number) {
 }
 
 // FIM DAS FUNÇÕES ARITMÉTICAS
+=======
+>>>>>>> refs/remotes/origin/master
 // Fim do arquivo math.zig
