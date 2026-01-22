@@ -172,7 +172,7 @@ inline fn arctanseries(x: anytype) @TypeOf(x) {
         f64 => 1e-12,
         f80 => 1e-20,
         f128, comptime_float => 1e-30,
-        else => @compileError("Não suportado para o tipo " ++ @typeName(@TypeOf(x))),
+        else => @panic("Não suportado para o tipo " ++ @typeName(@TypeOf(x))),
     };
     while (@abs(term) > approx): (n += 1.0) {
         term *= (-x * x) * (2.0 * n - 1.0) / (2.0 * n + 1.0); // Calcula o próximo termo
