@@ -26,7 +26,7 @@ test "basic cos func" {
 }
 
 test "basic tan func" {
-    const value: f64 = (std.math.pi/4.0);
+    const value: f64 = (std.math.pi / 4.0);
     std.debug.print("*** Valores para tangente ***\n", .{});
     std.debug.print("TAN({})nativo: {}\n", .{ value, @tan(value) });
     std.debug.print("tan({}): {}\n", .{ value, tan(value) });
@@ -46,13 +46,28 @@ test "cotangente func" {
     try std.testing.expect(@abs(result - 1.732051) < 1e-6);
 }
 test "arctan func" {
-    const value: f64 = std.math.pi / 4.0;
+    const value = std.math.pi / 3.0;
     const tangente = tan(value);
-    const result = arctan(1.0);
-    const expected = std.math.atan(tangente);
+    const result_arctan = math.arctan(tangente);
+    //     const result_arctanseries = math.arctanseries(tangente);
+    //const expected = std.math.atan(tangente);
     std.debug.print("*** Valores para arco tangente ***\n", .{});
     std.debug.print("Tangente({}) = {}\n", .{ value, tangente });
-    std.debug.print("Arctan({}) = {}\n", .{ tangente, result });
-    std.debug.print("Atan nativo ({}) = {}\n", .{ tangente, expected });
+    std.debug.print("Arctan fast({}) = {}\n", .{ tangente, result_arctan });
+    std.debug.print("Angulo calculado = {}\n", .{math.degreesFromRad(result_arctan)});
+    //     std.debug.print("Arctan Series({}) = {}\n", .{ tangente, result_arctanseries });
+    //std.debug.print("Atan nativo ({}) = {}\n", .{ tangente, expected });
+    //std.debug.print("Angulo calculado = {}\n", .{math.degreesFromRad(expected)});
+
     //try std.testing.expect(@abs(result - expected) < 1e-7);
+}
+
+test "pow func" {
+    const base: f64 = 2.0;
+    const exponent: i32 = -5;
+    const result = math.pow(base, exponent);
+    //const expected = 1024.0;
+    std.debug.print("*** Valores para pow ***\n", .{});
+    std.debug.print("{} elevado a {} = {}\n", .{ base, exponent, result });
+    //try std.testing.expect(result == expected);
 }
