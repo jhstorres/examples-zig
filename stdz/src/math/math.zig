@@ -184,6 +184,24 @@ inline fn arctanseries(x: anytype) @TypeOf(x) {
 // FIM DAS FUNÇÕES TRIGONOMÉTRICAS
 
 // FUNÇÕES ARITMÉTICAS
+
+/// Nome: isPrime(number)
+/// Função: Verifica se um número inteiro é primo
+/// Retorna: true se o número for primo, false caso contrário
+/// Exemplo: isPrime(7) retorna true
+pub inline fn isPrime(number: anytype) bool {
+    if (number <= 1) {
+        return false;
+    }
+    var i:u32 = 2;
+    while (i * i <= number) : (i += 1) {
+        if (number % i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
 /// Nome: fatorial(number)
 /// Função: Calcula o fatorial de um número inteiro não negativo
 /// Retorna: valor do fatorial conforme o tipo numérico de entrada

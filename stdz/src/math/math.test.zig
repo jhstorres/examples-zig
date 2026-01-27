@@ -71,3 +71,11 @@ test "pow func" {
     std.debug.print("{} elevado a {} = {}\n", .{ base, exponent, result });
     //try std.testing.expect(result == expected);
 }
+
+test "isPrime func" {
+    const num: u32 = 9;
+    const result = math.isPrime(num);
+    std.debug.print("*** Valores para isPrime ***\n", .{});
+    std.debug.print("O número {} é primo? {}\n", .{ num, result });
+    try std.testing.expect(result == false);
+}
