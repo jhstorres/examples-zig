@@ -117,7 +117,7 @@ pub inline fn sec(radians: anytype) @TypeOf(radians) {
 /// Função: Cálcula a arco tangente de uma tangente de um ângulo em radianos ou seja,
 /// o ângulo cujo valor da tangente é igual ao valor fornecido
 /// Retorna: valor do ângulo em radianos conforme o tipo numérico de entrada
-/// Observação: 
+/// Observação:
 /// 1.A função arctan() é definida apenas para valores de tangente diferentes de zero;
 /// 2.A princípio utilizamos a função com base no livro "Bibliotecas C Library - Kris Jamsa",
 /// mas este possue um erro conceitual para o cálculo (visto abaixo);
@@ -132,7 +132,7 @@ pub inline fn sec(radians: anytype) @TypeOf(radians) {
 /// 8.A série é truncada quando o valor absoluto do termo atual é menor que uma aproximação
 ///   definida conforme o tipo numérico de entrada;
 /// 9.Fonte de consulta: https://pt.wikipedia.org/wiki/S%C3%A9rie_de_Taylor e o CHAT GPT-4.
-/// 
+///
 /// Retorna: valor do ângulo
 /// Exemplo: arctan() retorna aproximadamente:
 /// Função publicada no livro "Bibliotecas C Library - Kris Jamsa":
@@ -142,30 +142,30 @@ pub inline fn sec(radians: anytype) @TypeOf(radians) {
 //     if (@abs(tangent) < 1e-7) @panic("Arco tangente indefinida para este ângulo");
 //     return (1.0 / tangent);
 // }
-pub fn arctan(x:anytype) @TypeOf(x) {
+pub fn arctan(x: anytype) @TypeOf(x) {
     if (@abs(x) > 1.0) {
         if (x > 0.0) {
             return std.math.pi / 2.0 - arctanseries(1.0 / x);
         } else {
             return -std.math.pi / 2.0 - arctanseries(1.0 / x);
         }
-    }    
-    if(@abs(x) < 0.5) {
+    }
+    if (@abs(x) < 0.5) {
         return arctanseries(x);
     }
-    if(x > 0.0) {
+    if (x > 0.0) {
         const y = (x - 1.0) / (x + 1.0);
         return std.math.pi / 4.0 + arctanseries(y);
     } else {
         const y = (x + 1.0) / (1.0 - x);
         return -std.math.pi / 4.0 + arctanseries(y);
-    }    
+    }
 }
 
 inline fn arctanseries(x: anytype) @TypeOf(x) {
     var term: @TypeOf(x) = x; // Primeiro termo da série
     var sum: @TypeOf(x) = term; // Inicializa a soma com o primeiro termo
-    var n:@TypeOf(x) = 1.0;
+    var n: @TypeOf(x) = 1.0;
     const approx = switch (@TypeOf(x)) {
         //f16 => 1e-3,
         f32 => 1e-6,
@@ -174,7 +174,7 @@ inline fn arctanseries(x: anytype) @TypeOf(x) {
         f128, comptime_float => 1e-30,
         else => @panic("Não suportado para o tipo " ++ @typeName(@TypeOf(x))),
     };
-    while (@abs(term) > approx): (n += 1.0) {
+    while (@abs(term) > approx) : (n += 1.0) {
         term *= (-x * x) * (2.0 * n - 1.0) / (2.0 * n + 1.0); // Calcula o próximo termo
         sum += term;
     }
@@ -193,7 +193,7 @@ pub inline fn isPrime(number: anytype) bool {
     if (number <= 1) {
         return false;
     }
-    var i:u32 = 2;
+    var i: u32 = 2;
     while (i * i <= number) : (i += 1) {
         if (number % i == 0) {
             return false;
@@ -214,11 +214,10 @@ pub inline fn fatorial(number: anytype) @TypeOf(number) {
     }
 }
 
-
 /// Nome: pow(number, exponent)
 /// Função: Calcula a potência de um número elevado a outro
 /// Retorna: valor da potência conforme o tipo numérico de entrada
-/// Observação: 
+/// Observação:
 /// 1.O expoente pode ser inteiro negativo, zero ou positivo;
 /// 2.Se o expoente for negativo, o resultado será o inverso da potência com
 /// expoente positivo;
@@ -226,10 +225,10 @@ pub inline fn fatorial(number: anytype) @TypeOf(number) {
 /// 4.Se o expoente for positivo, o resultado será o produto do número por ele
 /// mesmo, repetido o número de vezes indicado pelo expoente;
 /// 5.A função é implementada utilizando um loop para multiplicação recursiva;
-/// 
+///
 /// FONTE: CHAT GPT-4.
 /// Retorna: valor da potência conforme o tipo numérico de entrada.
-/// Exemplo: pow(2, 3) retorna 8
+/// Exemplo: pow(2, 3) retorna 8//
 pub inline fn pow(number: anytype, exponent: i32) @TypeOf(number) {
     if (exponent == 0) {
         return 1;
