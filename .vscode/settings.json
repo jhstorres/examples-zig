@@ -1,5 +1,5 @@
 {
-    "zig.path": "/opt/zig-linux-x86_64/zig",
-    "zig.zls.builtinPath": "/opt/zig-linux-x86_64/zls",
-    "zig.zls.buildRunnerPath": "/opt/zig-linux-x86_64/zls"
+    "zig.path": "/opt/zig/zig",
+    "zig.zls.builtinPath": "/opt/zig/zls",
+    "zig.zls.buildRunnerPath": "/opt/zig/zls"
 }
